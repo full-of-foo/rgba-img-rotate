@@ -1,15 +1,44 @@
 {
   "name": "rgba-img-rotate",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "rotate RGBA images",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "lint": "eslint src/**/*.ts",
+    "test": "jest --config jest.config.js"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/full-of-foo/rgba-img-rotate.git"
+  },
+  "keywords": [
+    "RGBA image",
+    "image",
+    "rotate",
+    "rotator"
+  ],
   "author": "Anthony Troy",
-  "license": "ISC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/full-of-foo/rgba-img-rotate/issues"
+  },
+  "homepage": "https://github.com/full-of-foo/rgba-img-rotate#README.md",
   "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-github": "^3.4.1",
+    "eslint-plugin-jest": "^23.8.2",
+    "jest": "^25.4.0",
+    "jest-circus": "^25.4.0",
+    "js-yaml": "^3.13.1",
+    "prettier": "^2.0.5",
+    "ts-jest": "^25.4.0",
     "typescript": "^3.8.3"
   }
 }
