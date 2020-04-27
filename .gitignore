@@ -34,4 +34,3 @@ test/*.js
 Thumbs.db
 tmp
 typings/
-yarn.lock
