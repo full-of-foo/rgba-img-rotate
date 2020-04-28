@@ -26,17 +26,26 @@ jobs:
             nodeModules-
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        # NOTE: this pins the action to a specific commit sha for security
+        # reasons but you can also use a version tag if desired. For example:
+        # ianwalter/puppeteer@3.0.0
+        uses: ianwalter/puppeteer@12728ddef82390d1ecd4732fb543f62177392fbb
+        with:
+          args: yarn install --frozen-lockfile
         env:
           CI: true
 
       - name: Lint
-        run: yarn lint
+        uses: ianwalter/puppeteer@12728ddef82390d1ecd4732fb543f62177392fbb
+        with:
+          args: yarn lint
         env:
           CI: true
 
       - name: Test
-        run: yarn test --ci --coverage --maxWorkers=2
+        uses: ianwalter/puppeteer@12728ddef82390d1ecd4732fb543f62177392fbb
+        with:
+          args: yarn test --ci --coverage --maxWorkers=2
         env:
           CI: true
 

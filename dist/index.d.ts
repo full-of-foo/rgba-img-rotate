@@ -1,3 +1,3 @@
-import { GreetOptions } from './greeter-types';
-declare const Greeter: (options: GreetOptions) => string;
-export default Greeter;
+export default class Rotator implements Object {
+    static rotate(image: ImageData, angle: number): ImageData;
+}

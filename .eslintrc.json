@@ -29,6 +29,6 @@
   "env": {
     "browser": true,
     "node": true,
-    "jest/globals": true
+    "jest": true
   }
 }

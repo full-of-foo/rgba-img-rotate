@@ -1,12 +1,12 @@
 {
-  "name": "rgba-img-rotate",
+  "name": "rgba-img-rotator",
   "version": "0.0.1",
   "description": "rotate RGBA images",
   "license": "MIT",
   "author": "Tony Troy",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "module": "dist/rgba-img-rotate.esm.js",
+  "module": "dist/rgba-img-rotator.esm.js",
   "files": [
     "dist",
     "src"
@@ -27,6 +27,9 @@
       "pre-commit": "tsdx lint"
     }
   },
+  "jest": {
+    "preset": "jest-puppeteer"
+  },
   "prettier": {
     "printWidth": 80,
     "semi": true,
@@ -41,6 +44,11 @@
     "husky": "^4.2.5",
     "tsdx": "^0.13.2",
     "tslib": "^1.11.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "@types/expect-puppeteer": "^4.4.1",
+    "@types/jest-environment-puppeteer": "^4.3.1",
+    "jest": "^25.4.0",
+    "jest-puppeteer": "^4.4.0",
+    "puppeteer": "^3.0.2"
   }
 }
