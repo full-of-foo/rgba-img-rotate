@@ -1,6 +1,6 @@
 declare interface GreetOptions {
-  salutaion: string
-  name: string
+  salutaion: string;
+  name: string;
 }
 
-export {GreetOptions}
+export { GreetOptions };

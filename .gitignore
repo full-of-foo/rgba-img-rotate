@@ -23,7 +23,7 @@ build/Release
 coverage
 coverage.*
 lib-cov
-lib/*.js
+dist/*.js
 logs
 node_modules
 npm-debug.log*
