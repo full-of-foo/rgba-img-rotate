@@ -3,21 +3,25 @@ class PixelArrayRotator {
   width: number;
   heigth: number;
 
-  constructor(data: Array<any>, w: number, h: number) {
+  constructor(data: Array<number>, w: number, h: number) {
     this.pixelArray = data;
     this.width = w;
     this.heigth = h;
   }
 
+  getPixelStartIndexForCoord(x: number, y: number) {
+    return (x + y * this.width) * 4;
+  }
+
   // Assumes just 90 from (0,0)
-  rotate(): Array<any> {
+  rotate(): Array<number> {
     let index;
     const rotatedArray = [];
     console.log(this.pixelArray, this.width, this.heigth);
 
     for (let x = 0; x < this.width; x += 1) {
       for (let y = 0; y < this.heigth; y += 1) {
-        index = (x + y * this.width) * 4;
+        index = this.getPixelStartIndexForCoord(x, y);
         rotatedArray.push(this.pixelArray[index]);
         rotatedArray.push(this.pixelArray[index + 1]);
         rotatedArray.push(this.pixelArray[index + 2]);

@@ -2,8 +2,9 @@ declare class PixelArrayRotator {
     pixelArray: Array<any>;
     width: number;
     heigth: number;
-    constructor(data: Array<any>, w: number, h: number);
-    rotate(): Array<any>;
+    constructor(data: Array<number>, w: number, h: number);
+    getPixelStartIndexForCoord(x: number, y: number): number;
+    rotate(): Array<number>;
 }
 declare class ImageDataRotator {
     static rotate(image: ImageData, angle: number): ImageData;
