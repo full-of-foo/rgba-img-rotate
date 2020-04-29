@@ -1,9 +1,74 @@
-import Rotator from '../src/index';
+import { ImageDataRotator, PixelArrayRotator } from '../src/index';
 import 'puppeteer';
 import 'expect-puppeteer';
 import 'jest-environment-puppeteer';
 
-describe('Rotator#rotate', () => {
+describe('PixelArrayRotator#rotate', () => {
+  // BB
+  // WW
+  // WW
+  const arr = [
+    0,
+    0,
+    0,
+    255,
+    0,
+    0,
+    0,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+  ];
+  // BWW
+  // BWW
+  const arr2 = [
+    0,
+    0,
+    0,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    0,
+    0,
+    0,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+  ];
+
+  it('should return a rotated-rightwards array', async () => {
+    const rotator = new PixelArrayRotator(arr, 2, 3);
+    expect(rotator.rotate()).toEqual(arr2);
+  });
+});
+
+describe('ImageDataRotator#rotate', () => {
   let page: any;
   beforeAll(async () => {
     page = await browser.newPage();
@@ -18,6 +83,6 @@ describe('Rotator#rotate', () => {
     });
     const angle = 90;
 
-    expect(Rotator.rotate(image, angle)).not.toBeNull();
+    expect(ImageDataRotator.rotate(image, angle)).not.toBeNull();
   });
 });

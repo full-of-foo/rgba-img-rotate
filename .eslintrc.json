@@ -17,6 +17,7 @@
   "plugins": ["jest", "@typescript-eslint"],
   "rules": {
     "no-undef": "off",
+    "max-classes-per-file": "off",
     "lines-between-class-members": "off",
     "@typescript-eslint/no-for-in-array": "warn",
     "@typescript-eslint/explicit-function-return-type": [
