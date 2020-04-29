@@ -45,11 +45,6 @@ jobs:
       - name: Test
         uses: ianwalter/puppeteer@12728ddef82390d1ecd4732fb543f62177392fbb
         with:
-          args: yarn test --ci --coverage --maxWorkers=2
-        env:
-          CI: true
-
-      - name: Build
-        run: yarn build
+          args: yarn build && yarn test --coverage
         env:
           CI: true

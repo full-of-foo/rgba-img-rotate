@@ -24,7 +24,6 @@ class PixelArrayRotator {
   private rotate90(): Array<Uint8Array> {
     let index: number;
     const rotatedArray = [];
-    console.log(this.pixelArray, this.width, this.heigth);
 
     for (let x = 0; x < this.width; x += 1) {
       for (let y = 0; y < this.heigth; y += 1) {
@@ -36,7 +35,6 @@ class PixelArrayRotator {
       }
     }
 
-    console.log(rotatedArray);
     return rotatedArray;
   }
 
@@ -85,8 +83,6 @@ class PixelArrayRotator {
 
 class ImageDataRotator {
   static rotate(image: ImageData, angle: number): ImageData {
-    console.log('called with angle: ', angle);
-
     const pixelArrayRotator = new PixelArrayRotator(
       Array.from(image.data),
       image.width,
