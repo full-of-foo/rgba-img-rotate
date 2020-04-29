@@ -13,8 +13,7 @@ class PixelArrayRotator {
     return (x + y * this.width) * 4;
   }
 
-  // Assumes just 90 from (0,0)
-  rotate(): Array<number> {
+  private rotate90(): Array<number> {
     let index;
     const rotatedArray = [];
     console.log(this.pixelArray, this.width, this.heigth);
@@ -31,6 +30,39 @@ class PixelArrayRotator {
 
     console.log(rotatedArray);
     return rotatedArray;
+  }
+
+  private rotate180(): Array<number> {
+    // TODO: implement
+    return this.pixelArray;
+  }
+
+  private rotate270(): Array<number> {
+    // TODO: implement
+    return this.pixelArray;
+  }
+
+  /**
+   * Rotates the given one-dimensional array by the given right angle in degrees.
+   * Degrees must be a multiple of 90. Returns the original input if told to
+   * rotate by 0 or 360 degrees.
+   */
+  rotate(degrees = 90): Array<number> {
+    if (degrees % 90 !== 0) {
+      throw new Error('Invalid input; degrees must be a multiple of 90');
+    }
+    const angle = ((degrees % 360) + 360) % 360;
+
+    if (angle === 90) {
+      return this.rotate90();
+    }
+    if (angle === 180) {
+      return this.rotate180();
+    }
+    if (angle === 270) {
+      return this.rotate270();
+    }
+    return this.pixelArray;
   }
 }
 
