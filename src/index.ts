@@ -1,10 +1,18 @@
+declare let ImageData: {
+  prototype: ImageData;
+  new (width: number, height: number): ImageData;
+  new (array: Uint8ClampedArray, width: number, height?: number): ImageData;
+};
+
 class PixelArrayRotator {
-  pixelArray: Array<any>;
+  pixelArray: Array<Uint8Array>;
   width: number;
   heigth: number;
+  rotatedWidth = 0;
+  rotatedHeigth = 0;
 
-  constructor(data: Array<number>, w: number, h: number) {
-    this.pixelArray = data;
+  constructor(data: Array<any>, w: number, h: number) {
+    this.pixelArray = data as Uint8Array[];
     this.width = w;
     this.heigth = h;
   }
@@ -13,8 +21,8 @@ class PixelArrayRotator {
     return (x + y * this.width) * 4;
   }
 
-  private rotate90(): Array<number> {
-    let index;
+  private rotate90(): Array<Uint8Array> {
+    let index: number;
     const rotatedArray = [];
     console.log(this.pixelArray, this.width, this.heigth);
 
@@ -32,12 +40,12 @@ class PixelArrayRotator {
     return rotatedArray;
   }
 
-  private rotate180(): Array<number> {
+  private rotate180(): Array<Uint8Array> {
     // TODO: implement
     return this.pixelArray;
   }
 
-  private rotate270(): Array<number> {
+  private rotate270(): Array<Uint8Array> {
     // TODO: implement
     return this.pixelArray;
   }
@@ -47,11 +55,19 @@ class PixelArrayRotator {
    * Degrees must be a multiple of 90. Returns the original input if told to
    * rotate by 0 or 360 degrees.
    */
-  rotate(degrees = 90): Array<number> {
+  rotate(degrees = 90): Array<Uint8Array> {
     if (degrees % 90 !== 0) {
       throw new Error('Invalid input; degrees must be a multiple of 90');
     }
     const angle = ((degrees % 360) + 360) % 360;
+
+    if (angle === 0 || angle === 180 || angle === 360) {
+      this.rotatedWidth = this.width;
+      this.rotatedHeigth = this.heigth;
+    } else if (angle === 90 || angle === 270) {
+      this.rotatedWidth = this.heigth;
+      this.rotatedHeigth = this.width;
+    }
 
     if (angle === 90) {
       return this.rotate90();
@@ -62,6 +78,7 @@ class PixelArrayRotator {
     if (angle === 270) {
       return this.rotate270();
     }
+
     return this.pixelArray;
   }
 }
@@ -69,7 +86,21 @@ class PixelArrayRotator {
 class ImageDataRotator {
   static rotate(image: ImageData, angle: number): ImageData {
     console.log('called with angle: ', angle);
-    return image;
+
+    const pixelArrayRotator = new PixelArrayRotator(
+      Array.from(image.data),
+      image.width,
+      image.height
+    );
+    const rotatedArray = new Uint8ClampedArray(
+      pixelArrayRotator.rotate(angle) as Array<any>
+    );
+
+    return new ImageData(
+      rotatedArray,
+      pixelArrayRotator.rotatedWidth,
+      pixelArrayRotator.rotatedHeigth
+    );
   }
 }
 

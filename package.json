@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "tsdx build --format umd --name 'rotator'",
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "tsdx build"

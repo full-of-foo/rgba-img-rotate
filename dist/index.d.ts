@@ -1,8 +1,10 @@
 declare class PixelArrayRotator {
-    pixelArray: Array<any>;
+    pixelArray: Array<Uint8Array>;
     width: number;
     heigth: number;
-    constructor(data: Array<number>, w: number, h: number);
+    rotatedWidth: number;
+    rotatedHeigth: number;
+    constructor(data: Array<any>, w: number, h: number);
     getPixelStartIndexForCoord(x: number, y: number): number;
     private rotate90;
     private rotate180;
@@ -12,7 +14,7 @@ declare class PixelArrayRotator {
      * Degrees must be a multiple of 90. Returns the original input if told to
      * rotate by 0 or 360 degrees.
      */
-    rotate(degrees?: number): Array<number>;
+    rotate(degrees?: number): Array<Uint8Array>;
 }
 declare class ImageDataRotator {
     static rotate(image: ImageData, angle: number): ImageData;

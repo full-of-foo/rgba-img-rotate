@@ -1,72 +1,72 @@
-import { ImageDataRotator, PixelArrayRotator } from '../src/index';
+import { PixelArrayRotator } from '../src/index';
+
+// BB
+// WW
+// WW
+const arr = [
+  0,
+  0,
+  0,
+  255,
+  0,
+  0,
+  0,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+];
+// BWW
+// BWW
+const arr2 = [
+  0,
+  0,
+  0,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  0,
+  0,
+  0,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+];
 
 const blackPixel = [0, 0, 0, 255];
 const whitePixel = [255, 255, 255, 255];
 
-const assertBlackPixel = (pixel: Array<number>) =>
+const assertBlackPixel = (pixel: Array<any>) =>
   expect(pixel).toEqual(blackPixel);
-const assertWhitePixel = (pixel: Array<number>) =>
+const assertWhitePixel = (pixel: Array<any>) =>
   expect(pixel).toEqual(whitePixel);
 
 describe('PixelArrayRotator', () => {
-  // BB
-  // WW
-  // WW
-  const arr = [
-    0,
-    0,
-    0,
-    255,
-    0,
-    0,
-    0,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-  ];
-  // BWW
-  // BWW
-  const arr2 = [
-    0,
-    0,
-    0,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    0,
-    0,
-    0,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-    255,
-  ];
-
   it('#getPixelStartIndexForCoord should return the starting index of the pixel at (X, Y)', async () => {
     const rotator = new PixelArrayRotator(arr, 2, 3);
     const rotator2 = new PixelArrayRotator(arr2, 3, 3);
@@ -117,19 +117,43 @@ describe('PixelArrayRotator', () => {
 
 describe('ImageDataRotator#rotate', () => {
   let page: any;
+
+  const browserRotate = async function(
+    pixelArray: any,
+    width: number,
+    height: number,
+    degree: number
+  ) {
+    return page.evaluate(
+      (pixelArr: any, w: number, h: number, d: number) => {
+        const data: Uint8ClampedArray = new Uint8ClampedArray(pixelArr);
+        const image = new window.ImageData(data, w, h);
+        // @ts-ignore
+        const rotatedImage = rotator.ImageDataRotator.rotate(image, d);
+
+        return {
+          pixelArray: Array.from(rotatedImage.data),
+          height: rotatedImage.rotatedHeigth,
+          width: rotatedImage.rotatedWidth,
+        };
+      },
+      pixelArray,
+      width,
+      height,
+      degree
+    );
+  };
+
   beforeAll(async () => {
     page = await browser.newPage();
+    await page.addScriptTag({ path: './dist/rotator.umd.development.js' });
   });
 
   afterAll(async () => page.close());
 
-  it('should return', async () => {
-    const image = await page.evaluate(() => {
-      const data: Uint8ClampedArray = new Uint8ClampedArray(40000);
-      return new window.ImageData(data, 200, 50);
-    });
-    const angle = 90;
+  it('should return a rotated-rightwards array', async () => {
+    const result = await browserRotate(arr, 2, 3, 90);
 
-    expect(ImageDataRotator.rotate(image, angle)).not.toBeNull();
+    expect(result.pixelArray).toEqual(arr2);
   });
 });
