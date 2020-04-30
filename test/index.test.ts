@@ -1,4 +1,3 @@
-import { resolve } from 'path';
 import { PixelArrayRotator } from '../src/index';
 
 // BB
@@ -148,7 +147,7 @@ describe('ImageDataRotator#rotate', () => {
   beforeAll(async () => {
     page = await browser.newPage();
     await page.addScriptTag({
-      path: resolve(__dirname, 'dist/rotator.umd.development.js'),
+      path: 'dist/rotator.umd.development.js',
     });
   });
 

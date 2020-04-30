@@ -1,5 +1,3 @@
-import { resolve } from 'path';
-
 // BB
 // WW
 // WW
@@ -97,7 +95,7 @@ describe('[PERF] ImageDataRotator#rotate', () => {
   beforeAll(async () => {
     page = await browser.newPage();
     await page.addScriptTag({
-      path: resolve(__dirname, 'dist/rotator.umd.development.js'),
+      path: 'dist/rotator.umd.development.js',
     });
   });
 
