@@ -66,12 +66,20 @@ Bundles the package to the `dist` folder. The package is optimized and bundled w
 
 ### `yarn build && yarn test`
 
-Bundles and runs unit, functional and performance tests. Note, the functional tests depend on a target bundled package to test, so that's why we build first!
+Bundles the package and runs unit, functional and performance tests. Note, the functional tests depend on a target bundled package to test, so that's why we build first!
 
 ### `yarn test:watch`
 
 Runs the test watcher (Jest) in an interactive mode.
 By default, runs tests related to files changed since the last commit.
+
+### `yarn test:coverage`
+
+Runs the tests and tell Jest to collect coverage information and report it to the output.
+
+### `yarn lint`
+
+Runs ESlint with Prettier on source and test .ts files, we're currently using a slight variant of the [AirBnB ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) configuration which adheres to AirBnB's style-guide. 
 
 ## Performance tests
 
