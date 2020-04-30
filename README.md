@@ -79,7 +79,7 @@ Runs the tests and tell Jest to collect coverage information and report it to th
 
 ### `yarn lint`
 
-Runs ESlint with Prettier on source and test .ts files, we're currently using a slight variant of the [AirBnB ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) configuration which adheres to AirBnB's style-guide. 
+Runs ESlint with Prettier on source and test .ts files, we're currently using a slight variant of the [AirBnB ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) configuration which adheres to AirBnB's style-guide.
 
 ## Performance tests
 
@@ -97,8 +97,15 @@ Performance tests used the `window.performance` API and so execute in the contex
 
 ## Roadmap
 
-TODO - checkboxes for what we have and what we dont
-TODO - add comments in code
-TODO - add references
-TODO - add CI badge
-TODO - update this read with rest of yarn tasks and so on
+- [x] Support for 90 degrees right-wards rotation via ImageDataRotator#rotate
+- [x] Automated [CI build pipeline](https://github.com/full-of-foo/rgba-img-rotate/actions) (GitHub actions)
+- [x] Basic (Node-only) unit testing with Jest
+- [x] Linting pipeline with ESlint and Prettier adhereing to AirBnB
+- [x] UMD bundle support
+- [x] Functional tests with [Pupeteer](https://github.com/puppeteer/puppeteer) and Jest
+- [x] Code coverage support
+- [x] Performance testing support
+- [ ] Support naive right-wards rotation greater than 90 degrees
+- [ ] Support naive left-wards rotation (-ve angle)
+- [ ] Add package to NPM registry
+- [ ] Improve rotation algo implementation
