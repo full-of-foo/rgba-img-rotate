@@ -105,6 +105,7 @@ Performance tests used the `window.performance` API and so execute in the contex
 - [x] Functional tests with [Pupeteer](https://github.com/puppeteer/puppeteer) and Jest
 - [x] Code coverage support
 - [x] Performance testing support
+- [ ] Refactor naive degree/angle input validation and usage in src/index.ts
 - [ ] Support naive right-wards rotation greater than 90 degrees
 - [ ] Support naive left-wards rotation (-ve angle)
 - [ ] Add package to NPM registry

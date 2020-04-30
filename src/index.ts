@@ -21,6 +21,7 @@ class PixelArrayRotator {
     return (x + y * this.width) * 4;
   }
 
+  // Inspired from source: https://javascriptinfo.com/view/1970504/rotating-a-1d-rgba-array
   private rotate90(): Array<Uint8Array> {
     let index: number;
     const rotatedArray = [];
@@ -39,12 +40,12 @@ class PixelArrayRotator {
   }
 
   private rotate180(): Array<Uint8Array> {
-    // TODO: implement
+    // TODO: implement and test (rotate90 twice to begin with)
     return this.pixelArray;
   }
 
   private rotate270(): Array<Uint8Array> {
-    // TODO: implement
+    // TODO: implement and test (rotate90 thrice to begin with)
     return this.pixelArray;
   }
 
