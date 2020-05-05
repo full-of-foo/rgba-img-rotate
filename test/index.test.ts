@@ -127,8 +127,13 @@ const assertWhitePixel = (pixel: Array<any>) =>
   expect(pixel).toEqual(whitePixel);
 
 describe('PixelArrayRotator', () => {
+  let rotator: PixelArrayRotator;
+
+  beforeEach(() => {
+    rotator = new PixelArrayRotator(arr, 2, 3);
+  });
+
   it('#getPixelStartIndexForCoord should return the starting index of the pixel at (X, Y)', async () => {
-    const rotator = new PixelArrayRotator(arr, 2, 3);
     const rotator2 = new PixelArrayRotator(arr2, 3, 3);
 
     let i = rotator.getPixelStartIndexForCoord(0, 0);
@@ -169,21 +174,27 @@ describe('PixelArrayRotator', () => {
   });
 
   it('#rotate by default should return a 90 degree rotated-rightwards array', async () => {
-    const rotator = new PixelArrayRotator(arr, 2, 3);
-
     expect(rotator.rotate()).toEqual(arr2);
   });
 
-  it('#rotate(180) should return a 180 degree rotated-rightwards array', async () => {
-    const rotator = new PixelArrayRotator(arr, 2, 3);
+  it('#rotate(-90) should return a -90 degree rotated-leftwards array', async () => {
+    expect(rotator.rotate(-90)).toEqual(arr4);
+  });
 
+  it('#rotate(180) should return a 180 degree rotated-rightwards array', async () => {
     expect(rotator.rotate(180)).toEqual(arr3);
   });
 
-  it('#rotate(270) should return a 270 degree rotated-rightwards array', async () => {
-    const rotator = new PixelArrayRotator(arr, 2, 3);
+  it('#rotate(-180) should return a -180 degree rotated-leftwards array', async () => {
+    expect(rotator.rotate(-180)).toEqual(arr3);
+  });
 
+  it('#rotate(270) should return a 270 degree rotated-rightwards array', async () => {
     expect(rotator.rotate(270)).toEqual(arr4);
+  });
+
+  it('#rotate(-270) should return a -270 degree rotated-leftwards array', async () => {
+    expect(rotator.rotate(-270)).toEqual(arr2);
   });
 });
 

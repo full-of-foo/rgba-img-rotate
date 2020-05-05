@@ -10,6 +10,11 @@ enum Angles {
   LhsFull = -360,
 }
 
+const rotate90Angles = Object.freeze([Angles.RhsOnce, Angles.LhsTrice]);
+const rotate180Angles = Object.freeze([Angles.RhsTwice, Angles.LhsTwice]);
+const rotate270Angles = Object.freeze([Angles.RhsTrice, Angles.LhsOnce]);
+const noopAngles = Object.freeze([Angles.None, Angles.RhsFull, Angles.LhsFull]);
+
 declare let ImageData: {
   prototype: ImageData;
   new (width: number, height: number): ImageData;
@@ -81,7 +86,7 @@ class PixelArrayRotator {
 
   /**
    * Rotates the given one-dimensional array by the given right angle in degrees.
-   * Degrees must be a multiple of 90. Returns the original input if told to
+   * Degrees must be a +/- multiple of 90. Returns the original input if told to
    * rotate by 0 or 360 degrees.
    */
   rotate(degrees = 90): Array<Uint8Array> {
@@ -91,25 +96,24 @@ class PixelArrayRotator {
       );
     }
 
-    if (
-      degrees === Angles.None ||
-      degrees === Angles.RhsTwice ||
-      degrees === Angles.RhsFull
-    ) {
+    if (rotate180Angles.includes(degrees) || noopAngles.includes(degrees)) {
       this.rotatedWidth = this.width;
       this.rotatedHeigth = this.heigth;
-    } else if (degrees === Angles.RhsOnce || degrees === Angles.RhsTrice) {
+    } else if (
+      rotate90Angles.includes(degrees) ||
+      rotate270Angles.includes(degrees)
+    ) {
       this.rotatedWidth = this.heigth;
       this.rotatedHeigth = this.width;
     }
 
-    if (degrees === Angles.RhsOnce) {
+    if (rotate90Angles.includes(degrees)) {
       return this.rotate90();
     }
-    if (degrees === Angles.RhsTwice) {
+    if (rotate180Angles.includes(degrees)) {
       return this.rotate180();
     }
-    if (degrees === Angles.RhsTrice) {
+    if (rotate270Angles.includes(degrees)) {
       return this.rotate270();
     }
 

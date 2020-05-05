@@ -107,6 +107,6 @@ Performance tests used the `window.performance` API and so execute in the contex
 - [x] Performance testing support
 - [ ] Refactor naive degree/angle input validation and usage in src/index.ts
 - [x] Support naive right-wards rotation greater than 90 degrees
-- [ ] Support naive left-wards rotation (-ve angle)
+- [x] Support naive left-wards rotation (-ve angle)
 - [ ] Add package to NPM registry
 - [ ] Improve rotation algo implementation

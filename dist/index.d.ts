@@ -22,7 +22,7 @@ declare class PixelArrayRotator {
     private rotate270;
     /**
      * Rotates the given one-dimensional array by the given right angle in degrees.
-     * Degrees must be a multiple of 90. Returns the original input if told to
+     * Degrees must be a +/- multiple of 90. Returns the original input if told to
      * rotate by 0 or 360 degrees.
      */
     rotate(degrees?: number): Array<Uint8Array>;
