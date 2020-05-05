@@ -22,15 +22,14 @@ declare let ImageData: {
 };
 
 class PixelArrayRotator {
-  pixelArray: Array<Uint8Array>;
+  pixelArray: Uint8Array;
   width: number;
   heigth: number;
   rotatedWidth = 0;
   rotatedHeigth = 0;
 
-  constructor(data: Array<any>, w: number, h: number) {
-    // TODO: validate number inputs (through types ideally)
-    this.pixelArray = data as Uint8Array[];
+  constructor(data: Uint8Array, w: number, h: number) {
+    this.pixelArray = data;
     this.width = w;
     this.heigth = h;
   }
@@ -40,7 +39,7 @@ class PixelArrayRotator {
   }
 
   // Inspired from source: https://javascriptinfo.com/view/1970504/rotating-a-1d-rgba-array
-  private rotate90(): Array<Uint8Array> {
+  private rotate90(): Uint8Array {
     let index: number;
     const rotatedArray = [];
 
@@ -54,10 +53,10 @@ class PixelArrayRotator {
       }
     }
 
-    return rotatedArray;
+    return new Uint8Array(rotatedArray);
   }
 
-  private rotate180(): Array<Uint8Array> {
+  private rotate180(): Uint8Array {
     // TODO: try reverse approach as something less naive
     const rotatedArray = this.rotate(90);
     return new PixelArrayRotator(
@@ -67,7 +66,7 @@ class PixelArrayRotator {
     ).rotate(90);
   }
 
-  private rotate270(): Array<Uint8Array> {
+  private rotate270(): Uint8Array {
     let index: number;
     const rotatedArray = [];
 
@@ -81,7 +80,7 @@ class PixelArrayRotator {
       }
     }
 
-    return rotatedArray;
+    return new Uint8Array(rotatedArray);
   }
 
   /**
@@ -89,7 +88,7 @@ class PixelArrayRotator {
    * Degrees must be a +/- multiple of 90. Returns the original input if told to
    * rotate by 0 or 360 degrees.
    */
-  rotate(degrees = 90): Array<Uint8Array> {
+  rotate(degrees = 90): Uint8Array {
     if (!(degrees in Angles)) {
       throw new Error(
         `Invalid input; degrees must be in ${Object.values(Angles)}`
@@ -124,13 +123,11 @@ class PixelArrayRotator {
 class ImageDataRotator {
   static rotate(image: ImageData, angle: number): ImageData {
     const pixelArrayRotator = new PixelArrayRotator(
-      Array.from(image.data),
+      new Uint8Array(Array.from(image.data)),
       image.width,
       image.height
     );
-    const rotatedArray = new Uint8ClampedArray(
-      pixelArrayRotator.rotate(angle) as Array<any>
-    );
+    const rotatedArray = new Uint8ClampedArray(pixelArrayRotator.rotate(angle));
 
     return new ImageData(
       rotatedArray,

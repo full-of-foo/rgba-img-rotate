@@ -3,7 +3,7 @@ import { PixelArrayRotator } from '../src/index';
 // BB
 // WW
 // WW
-const arr = [
+const uArr = new Uint8Array([
   0,
   0,
   0,
@@ -28,11 +28,11 @@ const arr = [
   255,
   255,
   255,
-];
+]);
 
 // WWB
 // WWB
-const arr2 = [
+const uArr2 = new Uint8Array([
   255,
   255,
   255,
@@ -57,12 +57,12 @@ const arr2 = [
   0,
   0,
   255,
-];
+]);
 
 // WW
 // WW
 // BB
-const arr3 = [
+const uArr3 = new Uint8Array([
   255,
   255,
   255,
@@ -87,11 +87,11 @@ const arr3 = [
   0,
   0,
   255,
-];
+]);
 
 // BWW
 // BWW
-const arr4 = [
+const uArr4 = new Uint8Array([
   0,
   0,
   0,
@@ -116,7 +116,7 @@ const arr4 = [
   255,
   255,
   255,
-];
+]);
 
 const blackPixel = [0, 0, 0, 255];
 const whitePixel = [255, 255, 255, 255];
@@ -130,11 +130,11 @@ describe('PixelArrayRotator', () => {
   let rotator: PixelArrayRotator;
 
   beforeEach(() => {
-    rotator = new PixelArrayRotator(arr, 2, 3);
+    rotator = new PixelArrayRotator(uArr, 2, 3);
   });
 
   it('#getPixelStartIndexForCoord should return the starting index of the pixel at (X, Y)', async () => {
-    const rotator2 = new PixelArrayRotator(arr2, 3, 3);
+    const rotator2 = new PixelArrayRotator(uArr2, 3, 3);
 
     let i = rotator.getPixelStartIndexForCoord(0, 0);
     const firstPixel = [
@@ -174,27 +174,27 @@ describe('PixelArrayRotator', () => {
   });
 
   it('#rotate by default should return a 90 degree rotated-rightwards array', async () => {
-    expect(rotator.rotate()).toEqual(arr2);
+    expect(rotator.rotate()).toEqual(uArr2);
   });
 
   it('#rotate(-90) should return a -90 degree rotated-leftwards array', async () => {
-    expect(rotator.rotate(-90)).toEqual(arr4);
+    expect(rotator.rotate(-90)).toEqual(uArr4);
   });
 
   it('#rotate(180) should return a 180 degree rotated-rightwards array', async () => {
-    expect(rotator.rotate(180)).toEqual(arr3);
+    expect(rotator.rotate(180)).toEqual(uArr3);
   });
 
   it('#rotate(-180) should return a -180 degree rotated-leftwards array', async () => {
-    expect(rotator.rotate(-180)).toEqual(arr3);
+    expect(rotator.rotate(-180)).toEqual(uArr3);
   });
 
   it('#rotate(270) should return a 270 degree rotated-rightwards array', async () => {
-    expect(rotator.rotate(270)).toEqual(arr4);
+    expect(rotator.rotate(270)).toEqual(uArr4);
   });
 
   it('#rotate(-270) should return a -270 degree rotated-leftwards array', async () => {
-    expect(rotator.rotate(-270)).toEqual(arr2);
+    expect(rotator.rotate(-270)).toEqual(uArr2);
   });
 });
 
@@ -237,8 +237,8 @@ describe('ImageDataRotator#rotate', () => {
   afterAll(async () => page.close());
 
   it('should return a rotated-rightwards array', async () => {
-    const result = await browserRotate(arr, 2, 3, 90);
+    const result = await browserRotate(Array.from(uArr), 2, 3, 90);
 
-    expect(result.pixelArray).toEqual(arr2);
+    expect(result.pixelArray).toEqual(Array.from(uArr2));
   });
 });
