@@ -31,7 +31,7 @@ $ yarn link # make rgba-img-rotator available
 $ node # enter console
 > const { ImageData } = require('canvas')
 > const { ImageDataRotator } = require('./dist/rotator.umd.development.js')
-> const arr = [0,0,0,255,0,0,0,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,]
+> const arr = [0,0,0,255,0,0,0,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255]
 > const rotatedImageData = ImageDataRotator.rotate(new ImageData(new Uint8ClampedArray(arr), 2, 3), 90)
 ```
 
@@ -47,7 +47,7 @@ $ mkdir -p tmp && echo "<html>
 </html>" >> tmp/index.html
 $ open tmp/index.html # open browser
 # ...in development console / global scope
-> const arr = [0,0,0,255,0,0,0,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,]  
+> const arr = [0,0,0,255,0,0,0,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255]  
 > const ImageDataRotator = window.rotator.ImageDataRotator
 > ImageDataRotator.rotate(new ImageData(new Uint8ClampedArray(arr), 2, 3), 90)
 ```
@@ -106,7 +106,7 @@ Performance tests used the `window.performance` API and so execute in the contex
 - [x] Code coverage support
 - [x] Performance testing support
 - [ ] Refactor naive degree/angle input validation and usage in src/index.ts
-- [ ] Support naive right-wards rotation greater than 90 degrees
+- [x] Support naive right-wards rotation greater than 90 degrees
 - [ ] Support naive left-wards rotation (-ve angle)
 - [ ] Add package to NPM registry
 - [ ] Improve rotation algo implementation

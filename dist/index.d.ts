@@ -1,3 +1,14 @@
+declare enum Angles {
+    None = 0,
+    RhsOnce = 90,
+    RhsTwice = 180,
+    RhsTrice = 270,
+    RhsFull = 360,
+    LhsOnce = -90,
+    LhsTwice = -180,
+    LhsTrice = -270,
+    LhsFull = -360
+}
 declare class PixelArrayRotator {
     pixelArray: Array<Uint8Array>;
     width: number;
@@ -19,4 +30,4 @@ declare class PixelArrayRotator {
 declare class ImageDataRotator {
     static rotate(image: ImageData, angle: number): ImageData;
 }
-export { PixelArrayRotator, ImageDataRotator };
+export { Angles, PixelArrayRotator, ImageDataRotator };

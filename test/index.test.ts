@@ -29,9 +29,69 @@ const arr = [
   255,
   255,
 ];
-// BWW
-// BWW
+
+// WWB
+// WWB
 const arr2 = [
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  0,
+  0,
+  0,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  0,
+  0,
+  0,
+  255,
+];
+
+// WW
+// WW
+// BB
+const arr3 = [
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  255,
+  0,
+  0,
+  0,
+  255,
+  0,
+  0,
+  0,
+  255,
+];
+
+// BWW
+// BWW
+const arr4 = [
   0,
   0,
   0,
@@ -87,7 +147,7 @@ describe('PixelArrayRotator', () => {
     ];
 
     assertBlackPixel(firstPixel);
-    assertBlackPixel(firstPixel2);
+    assertWhitePixel(firstPixel2);
 
     i = rotator.getPixelStartIndexForCoord(0, 1);
     const secondRowFirstPixel = [
@@ -105,13 +165,25 @@ describe('PixelArrayRotator', () => {
     ];
 
     assertWhitePixel(secondRowFirstPixel);
-    assertBlackPixel(secondRowFirstPixel2);
+    assertWhitePixel(secondRowFirstPixel2);
   });
 
-  it('#rotate should return a rotated-rightwards array', async () => {
+  it('#rotate by default should return a 90 degree rotated-rightwards array', async () => {
     const rotator = new PixelArrayRotator(arr, 2, 3);
 
     expect(rotator.rotate()).toEqual(arr2);
+  });
+
+  it('#rotate(180) should return a 180 degree rotated-rightwards array', async () => {
+    const rotator = new PixelArrayRotator(arr, 2, 3);
+
+    expect(rotator.rotate(180)).toEqual(arr3);
+  });
+
+  it('#rotate(270) should return a 270 degree rotated-rightwards array', async () => {
+    const rotator = new PixelArrayRotator(arr, 2, 3);
+
+    expect(rotator.rotate(270)).toEqual(arr4);
   });
 });
 
